@@ -4,6 +4,9 @@ import React from "react";
 import styled from "styled-components";
 import { mobile } from "../responsive";
 
+import { useNavigate } from "react-router-dom";
+
+
 const Container = styled.div`
   height: 60px;
   ${mobile({ height: "50px" })}
@@ -49,6 +52,7 @@ const Center = styled.div`
 
 const Logo = styled.h1`
   font-weight: bold;
+  cursor: pointer;
   ${mobile({ fontSize: "24px" })}
 `;
 const Right = styled.div`
@@ -67,6 +71,23 @@ const MenuItem = styled.div`
 `;
 
 const Navbar = () => {
+
+  const navigator = useNavigate();
+  const handleRegister = ()=>{
+    navigator('/register');
+ }
+ const handleLogin = ()=>{
+  navigator('/login');
+ }  
+ const handleCart = ()=>{
+  navigator('/cart')
+ }
+
+ const handleHome = ()=>{
+  navigator('/')
+ }
+
+
   return (
     <Container>
       <Wrapper>
@@ -78,14 +99,14 @@ const Navbar = () => {
           </SearchContainer>
         </Left>
         <Center>
-          <Logo>eCom.</Logo>
+          <Logo onClick={handleHome} >eCom.</Logo>
         </Center>
         <Right>
-          <MenuItem>REGISTER</MenuItem>
-          <MenuItem>SIGN IN</MenuItem>
+          <MenuItem onClick={handleRegister}>REGISTER</MenuItem>
+          <MenuItem onClick={handleLogin} >SIGN IN</MenuItem>
           <MenuItem>
             <Badge badgeContent={4} color="primary">
-              <ShoppingCartOutlined />
+              <ShoppingCartOutlined onClick={handleCart} />
             </Badge>
           </MenuItem>
         </Right>
